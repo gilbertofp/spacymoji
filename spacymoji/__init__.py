@@ -59,12 +59,12 @@ class Emoji(object):
         emoji_patterns = list(nlp.tokenizer.pipe(EMOJI.keys()))
         self.matcher.add(pattern_id, None, *emoji_patterns)
         # Add attributes
-        Doc.set_extension(self._has_emoji, getter=self.has_emoji)
-        Doc.set_extension(self._emoji, getter=self.iter_emoji)
-        Span.set_extension(self._has_emoji, getter=self.has_emoji)
-        Span.set_extension(self._emoji, getter=self.iter_emoji)
-        Token.set_extension(self._is_emoji, default=False)
-        Token.set_extension(self._emoji_desc, getter=self.get_emoji_desc)
+        Doc.set_extension(self._has_emoji, getter=self.has_emoji, force=True)
+        Doc.set_extension(self._emoji, getter=self.iter_emoji, force=True)
+        Span.set_extension(self._has_emoji, getter=self.has_emoji, force=True)
+        Span.set_extension(self._emoji, getter=self.iter_emoji, force=True)
+        Token.set_extension(self._is_emoji, default=False, force=True)
+        Token.set_extension(self._emoji_desc, getter=self.get_emoji_desc, force=True)
 
     def __call__(self, doc):
         """Apply the pipeline component to a `Doc` object.
